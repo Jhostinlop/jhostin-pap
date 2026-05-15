@@ -15,13 +15,29 @@ body {
 
 /* --- Ecrã Inicial --- */
 .home-bg {
+  /* Mantengo tus degradados con el Azul Rey */
   background: linear-gradient(rgba(5, 5, 5, 0.8), rgba(3, 3, 181, 0.4)),
               url('assets/images/pap-preview.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
+  
+  /* ESTO ES LO IMPORTANTE */
+  background-size: cover;      /* La imagen cubre todo sin estirarse */
+  background-position: center; /* Se centra para que lo más importante se vea */
+  background-repeat: no-repeat;
+  
+  /* Ajuste para móviles */
+  min-height: 100vh;           /* Altura total de la pantalla */
+  width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* Media Query: Ajustes específicos para móviles */
+@media (max-width: 600px) {
+  .home-bg {
+    /* Si la imagen sigue viéndose mal, puedes ajustar el foco aquí */
+    background-position: center center; 
+    background-attachment: scroll; /* Evita errores visuales en iOS */
+  }
 }
 
 .menu-container { padding: 20px; position: relative; z-index: 10; }
@@ -110,3 +126,11 @@ header { text-align: center; padding: 40px 20px 20px 20px; }
 .btn:hover { transform: scale(1.05); }
 
 footer { text-align: center; color: rgba(255,255,255,0.5); font-size: 10px; padding: 20px; }
+* {
+  -webkit-tap-highlight-color: transparent; /* Quita el cuadro azul al tocar botones */
+  user-select: none; /* Evita copiar texto por error como en una App real */
+}
+
+input, textarea {
+  user-select: text; /* Permite escribir si añades formularios después */
+}
