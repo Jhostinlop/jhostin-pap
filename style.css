@@ -1,3 +1,4 @@
+/* 1. VARIABLES Y RESET TOTAL */
 :root {
   --primary-color: #0303b5;    /* Tu Azul Rey */
   --accent-color: #00d4ff;     /* Cian para detalles tech */
@@ -5,42 +6,41 @@
   --text-light: #ffffff;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body { 
-  font-family: 'Segoe UI', sans-serif; 
-  background-color: var(--bg-dark); 
-  color: var(--text-light); 
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; /* Se comporta como una App, no permite copiar texto */
 }
 
-/* --- Ecrã Inicial --- */
-.home-bg {
-  /* Mantengo tus degradados con el Azul Rey */
-  background: linear-gradient(rgba(5, 5, 5, 0.8), rgba(3, 3, 181, 0.4)),
-              url('assets/images/pap-preview.jpg');
-  
-  /* ESTO ES LO IMPORTANTE */
-  background-size: cover;      /* La imagen cubre todo sin estirarse */
-  background-position: center; /* Se centra para que lo más importante se vea */
-  background-repeat: no-repeat;
-  
-  /* Ajuste para móviles */
-  min-height: 100vh;           /* Altura total de la pantalla */
+html, body {
   width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* 2. PÁGINA INICIAL (index.html) */
+.home-bg {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  /* Altura dinámica para evitar barras blancas en móviles */
+  min-height: 100vh; 
+  min-height: 100dvh; 
+  
+  background: linear-gradient(rgba(5, 5, 5, 0.7), rgba(3, 3, 181, 0.4)),
+              url('assets/images/pap-preview.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-/* Media Query: Ajustes específicos para móviles */
-@media (max-width: 600px) {
-  .home-bg {
-    /* Si la imagen sigue viéndose mal, puedes ajustar el foco aquí */
-    background-position: center center; 
-    background-attachment: scroll; /* Evita errores visuales en iOS */
-  }
-}
-
-.menu-container { padding: 20px; position: relative; z-index: 10; }
+/* 3. MENÚ HAMBURGUESA */
+.menu-container { padding: 20px; position: relative; z-index: 100; }
 
 .hamburger { 
   font-size: 30px; 
@@ -63,12 +63,13 @@ body {
 #nav-menu a { 
   display: block; 
   color: white; 
-  padding: 12px; 
+  padding: 15px; 
   text-decoration: none; 
   font-weight: bold; 
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
+/* 4. CONTENIDO PRINCIPAL */
 .hero-content {
   flex-grow: 1;
   display: flex;
@@ -76,61 +77,101 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 20px;
 }
 
 .main-logo { 
-  width: 120px; 
-  border-radius: 20px; 
+  width: 40%;
+  max-width: 140px; 
+  border-radius: 25px; 
   margin-bottom: 20px;
-  box-shadow: 0 0 15px var(--primary-color); 
+  box-shadow: 0 0 20px rgba(3, 3, 181, 0.6); 
 }
 
-/* --- Página PAP --- */
-header { text-align: center; padding: 40px 20px 20px 20px; }
+h1 { font-size: 2.2rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
+
+/* 5. PÁGINA PAP CON VIDEO O GIF (pap.html) */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  background-color: black;
+}
+
+.bg-video {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(5, 5, 5, 0.85), rgba(3, 3, 181, 0.5));
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
 
 .pap-image { 
   width: 90%; 
   max-width: 450px; 
-  display: block; 
-  margin: 0 auto 20px auto;
+  margin: 20px auto;
   border-radius: 15px; 
   border: 2px solid var(--primary-color);
-  box-shadow: 0 0 20px rgba(3, 3, 181, 0.5);
+  box-shadow: 0 0 25px rgba(3, 3, 181, 0.5);
 }
 
 .pap-text { 
   font-size: 16px; 
   line-height: 1.6; 
   max-width: 500px; 
-  margin: 0 auto; 
-  padding: 10px; 
+  padding: 15px; 
   text-align: justify; 
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
 }
 
+/* 6. BOTONES Y FOOTER */
 .btn {
   display: block;
-  width: 80%;
+  width: 85%;
   max-width: 300px;
   background: var(--primary-color);
   color: white;
   text-align: center;
-  padding: 15px;
-  margin: 20px auto;
-  border-radius: 12px;
+  padding: 18px;
+  margin: 25px auto;
+  border-radius: 15px;
   text-decoration: none;
   font-weight: bold;
   border: 1px solid var(--accent-color);
-  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.btn:hover { transform: scale(1.05); }
-
-footer { text-align: center; color: rgba(255,255,255,0.5); font-size: 10px; padding: 20px; }
-* {
-  -webkit-tap-highlight-color: transparent; /* Quita el cuadro azul al tocar botones */
-  user-select: none; /* Evita copiar texto por error como en una App real */
+footer { 
+  text-align: center; 
+  color: rgba(255,255,255,0.5); 
+  font-size: 11px; 
+  padding: 20px; 
+  margin-top: auto; 
 }
 
-input, textarea {
-  user-select: text; /* Permite escribir si añades formularios después */
+/* 7. AJUSTE PARA PANTALLAS PEQUEÑAS */
+@media (max-width: 370px) {
+  h1 { font-size: 1.8rem; }
+  .pap-text { font-size: 14px; }
 }
